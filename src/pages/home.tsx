@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,7 +24,11 @@ import {
   Bell,
   TrendingUp,
   DollarSign,
-  Clock
+  Clock,
+  Heart,
+  Lightbulb,
+  BarChart,
+  Layers
 } from 'lucide-react';
 import dashboardMockup from '@/assets/dashboard-mockup.jpg';
 import featuredLogos from '@/assets/featured-logos.jpg';
@@ -53,36 +58,45 @@ const useIntersectionObserver = () => {
 
 // Hero Section
 const HeroSection = () => (
-  <section className="min-h-screen flex items-center justify-center px-4 pt-20">
-    <div className="container mx-auto text-center section-fade">
+  <section className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
+    <div className="absolute inset-0 w-full h-full z-0">
+      <iframe 
+        src='https://my.spline.design/particleaibrain-Bw31czvtCbsp2qOgyYvBgqRH/' 
+        frameBorder='0' 
+        width='100%' 
+        height='100%'
+        title="3D AI Brain Visualization"
+      ></iframe>
+    </div>
+    <div className="container mx-auto text-center section-fade relative z-10">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-center gap-2 mb-6">
           <span className="bg-primary/10 text-primary text-sm px-3 py-1 rounded-full border border-primary/20">
-            🚀 Introducing New Features
+            🚀 Presentando Nuevas Funciones
           </span>
         </div>
         <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6 leading-tight">
-          Revolutionize Your
+          Revoluciona Tu
           <br />
-          <span className="text-gradient font-medium">Workflow with AI Power</span>
+          <span className="text-gradient font-medium">Flujo de Trabajo con IA</span>
         </h1>
         <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-          Harness the future of artificial intelligence to boost productivity, creativity, and decision-making.
+          Aprovecha el futuro de la inteligencia artificial para aumentar la productividad, creatividad y toma de decisiones.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
           <Button variant="hero" size="lg" className="px-8">
-            Get Started Free
+            Comienza Gratis
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <Button variant="outline" size="lg" className="px-8">
             <Play className="mr-2 h-5 w-5" />
-            See It In Action
+            Ver en Acción
           </Button>
         </div>
         <div className="relative max-w-4xl mx-auto">
           <img 
             src={dashboardMockup} 
-            alt="VisitScale Dashboard" 
+            alt="Panel de VisitScale" 
             className="rounded-xl shadow-2xl animate-float glassmorphic border border-border/20"
           />
         </div>
@@ -95,11 +109,11 @@ const HeroSection = () => (
 const FeaturedSection = () => (
   <section className="py-16 section-fade">
     <div className="container mx-auto px-4 text-center">
-      <p className="text-muted-foreground mb-8">Trust by 99,000+ world-class brands and organizations</p>
+      <p className="text-muted-foreground mb-8">Confiado por más de 99,000+ marcas y organizaciones de clase mundial</p>
       <div className="opacity-60 hover:opacity-100 transition-opacity duration-300">
         <img 
           src={featuredLogos} 
-          alt="Featured in publications" 
+          alt="Destacado en publicaciones" 
           className="mx-auto max-h-16 object-contain"
         />
       </div>
@@ -113,19 +127,19 @@ const TestimonialsSection = () => {
   
   const testimonials = [
     {
-      text: "ROI Creative transformed our brand. Since launching our new website, engagement and conversions have risen by 300%.",
+      text: "ROI Creative transformó nuestra marca. Desde el lanzamiento de nuestro nuevo sitio web, el compromiso y las conversiones han aumentado un 300%.",
       author: "Alex Tellos",
-      position: "Founder of NovaTech",
+      position: "Fundador de NovaTech",
       rating: 5
     },
     {
-      text: "This has our needs perfectly. It is definitely the right investment and solution. With VisitScale I was able to save 20 hours per week.",
+      text: "Esto se adapta perfectamente a nuestras necesidades. Es definitivamente la inversión y solución correcta. Con VisitScale pude ahorrar 20 horas por semana.",
       author: "Dana Jones",
-      position: "CEO at InnovateCorp",
+      position: "CEO de InnovateCorp",
       rating: 5
     },
     {
-      text: "VisitScale increased our lead conversion by 30% while reducing our customer support workload by 50%.",
+      text: "VisitScale aumentó nuestra conversión de leads en un 30% mientras reducía nuestra carga de trabajo de atención al cliente en un 50%.",
       author: "Chris Mitchell",
       position: "CTO",
       rating: 5
@@ -149,8 +163,8 @@ const TestimonialsSection = () => {
     <section className="py-20 section-fade">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">What our clients say about us</h2>
-          <p className="text-muted-foreground">We build lasting partnerships by delivering outstanding results.</p>
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Lo que dicen nuestros clientes</h2>
+          <p className="text-muted-foreground">Construimos relaciones duraderas al ofrecer resultados excepcionales.</p>
         </div>
         
         <div className="max-w-3xl mx-auto relative">
@@ -194,21 +208,21 @@ const TestimonialsSection = () => {
 const HowItWorksSection = () => {
   const steps = [
     {
-      title: "1. Accelerate your product",
-      subtitle: "Connect your tools",
-      description: "Use Slack APIs to analyze AI answers for your customers",
+      title: "1. Acelera tu producto",
+      subtitle: "Conecta tus herramientas",
+      description: "Utiliza las APIs de Slack para analizar respuestas de IA para tus clientes",
       icon: <Network className="h-8 w-8" />
     },
     {
-      title: "2. Set Your Goals", 
-      subtitle: "Choose your automation flow",
-      description: "Tell us what you need help with.",
+      title: "2. Establece tus objetivos", 
+      subtitle: "Elige tu flujo de automatización",
+      description: "Dinos en qué necesitas ayuda.",
       icon: <Target className="h-8 w-8" />
     },
     {
-      title: "3. Track & Improve",
-      subtitle: "Launch and scale", 
-      description: "See your progress and optimize.",
+      title: "3. Seguimiento y mejora",
+      subtitle: "Lanza y escala", 
+      description: "Observa tu progreso y optimiza.",
       icon: <TrendingUp className="h-8 w-8" />
     }
   ];
@@ -217,9 +231,9 @@ const HowItWorksSection = () => {
     <section className="py-20 section-fade">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">How It Works</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Cómo Funciona</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Get started with our simple three-step process to transform your business automation
+            Comienza con nuestro simple proceso de tres pasos para transformar la automatización de tu negocio
           </p>
         </div>
         
@@ -248,23 +262,23 @@ const HowItWorksSection = () => {
 const FeaturesSection = () => {
   const features = [
     {
-      title: "CRM Integration",
-      description: "Seamlessly connect with your existing CRM systems for automated data synchronization",
+      title: "Integración CRM",
+      description: "Conéctate sin problemas con tus sistemas CRM existentes para la sincronización automática de datos",
       icon: <Settings2 className="h-8 w-8" />
     },
     {
-      title: "Natural Language Chat",
-      description: "AI-powered conversations that understand context and provide human-like responses",
+      title: "Chat en Lenguaje Natural",
+      description: "Conversaciones potenciadas por IA que entienden el contexto y proporcionan respuestas similares a las humanas",
       icon: <MessageCircle className="h-8 w-8" />
     },
     {
-      title: "Lead Qualification",
-      description: "Automatically qualify and score leads based on your custom criteria",
+      title: "Calificación de Leads",
+      description: "Califica y puntúa leads automáticamente según tus criterios personalizados",
       icon: <Target className="h-8 w-8" />
     },
     {
-      title: "Real-time Notifications",
-      description: "Get instant alerts for important events and customer interactions",
+      title: "Notificaciones en Tiempo Real",
+      description: "Recibe alertas instantáneas sobre eventos importantes e interacciones con clientes",
       icon: <Bell className="h-8 w-8" />
     }
   ];
@@ -273,9 +287,9 @@ const FeaturesSection = () => {
     <section className="py-20 section-fade">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Powerful Features</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Funciones Potentes</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to automate your business processes and scale efficiently
+            Todo lo que necesitas para automatizar tus procesos de negocio y escalar eficientemente
           </p>
         </div>
         
@@ -299,117 +313,62 @@ const FeaturesSection = () => {
   );
 };
 
-// Mission Section
-const MissionSection = () => (
-  <section className="py-20 section-fade">
-    <div className="container mx-auto px-4">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="bg-primary/5 p-8 rounded-2xl border border-primary/10">
-          <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl font-light mb-6">Our Mission</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            At VisitScale, we believe that automation should be simple and accessible for businesses of all sizes. 
-            Our mission is to democratize AI-powered workflows, enabling companies to focus on what matters most - 
-            growing their business and serving their customers. We're committed to making advanced automation 
-            technology intuitive, affordable, and incredibly effective.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-// Pricing Section
-const PricingSection = () => {
-  const plans = [
+// Benefits Section (New)
+const BenefitsSection = () => {
+  const benefits = [
     {
-      name: "Starter",
-      price: "$29",
-      period: "/month",
-      description: "Perfect for small businesses getting started with automation",
-      features: [
-        "All Basic plan features",
-        "Advanced AI insights and predictions", 
-        "Dynamic pricing optimization",
-        "24/7 priority support",
-        "Custom dashboard configuration"
-      ],
-      isRecommended: false
+      title: "Ahorra Tiempo",
+      description: "Automatiza tareas repetitivas y libera hasta 20 horas semanales para enfocarte en lo que realmente importa",
+      icon: <Clock className="h-10 w-10" />
     },
     {
-      name: "Pro",
-      price: "$29",
-      period: "/month", 
-      description: "Ideal for growing businesses with advanced automation needs",
-      features: [
-        "All Basic plan features",
-        "Advanced AI insights and predictions",
-        "Dynamic pricing optimization", 
-        "24/7 priority support",
-        "Custom dashboard configuration"
-      ],
-      isRecommended: true
+      title: "Reduce Costos",
+      description: "Disminuye tus gastos operativos hasta un 40% eliminando procesos manuales y optimizando recursos",
+      icon: <DollarSign className="h-10 w-10" />
     },
     {
-      name: "Enterprise",
-      price: "Custom",
-      period: "",
-      description: "For large organizations requiring custom solutions",
-      features: [
-        "All Pro plan features",
-        "Full API access and integrations",
-        "Personalized AI model training",
-        "Dedicated account manager",
-        "Unlimited report generation"
-      ],
-      isRecommended: false
-    }
+      title: "Mejora la Experiencia del Cliente",
+      description: "Ofrece respuestas instantáneas 24/7 y personaliza cada interacción para incrementar la satisfacción",
+      icon: <Heart className="h-10 w-10" />
+    },
+    {
+      title: "Decisiones Basadas en Datos",
+      description: "Obtén insights valiosos y automatiza la generación de informes para tomar mejores decisiones",
+      icon: <BarChart className="h-10 w-10" />
+    },
+    {
+      title: "Escalabilidad Sin Límites",
+      description: "Crece tu negocio sin aumentar proporcionalmente tu personal o recursos internos",
+      icon: <Layers className="h-10 w-10" />
+    },
+    {
+      title: "Innovación Constante",
+      description: "Mantente a la vanguardia con actualizaciones automáticas y nuevas funcionalidades cada mes",
+      icon: <Lightbulb className="h-10 w-10" />
+    },
   ];
 
   return (
-    <section className="py-20 section-fade">
+    <section className="py-20 bg-gradient-to-b from-background to-secondary/20 section-fade">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Pick the Perfect Plan</h2>
-          <p className="text-muted-foreground">Flexible pricing plans designed to fit businesses of all sizes</p>
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Beneficios de VisitScale</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Descubre cómo nuestra plataforma de automatización transforma completamente tu negocio
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
-            <Card key={index} className={`relative p-6 ${plan.isRecommended ? 'ring-2 ring-primary' : ''}`}>
-              {plan.isRecommended && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-medium">
-                    Recommended
-                  </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {benefits.map((benefit, index) => (
+            <Card key={index} className="p-6 hover:scale-105 transition-transform duration-300 h-full">
+              <CardHeader className="pb-4">
+                <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
+                  <div className="text-primary">{benefit.icon}</div>
                 </div>
-              )}
-              <CardHeader className="text-center pb-6">
-                <div className="bg-primary/10 p-3 rounded-lg w-fit mx-auto mb-4">
-                  <DollarSign className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                <div className="mt-4">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  <span className="text-muted-foreground">{plan.period}</span>
-                </div>
-                <CardDescription className="mt-2">{plan.description}</CardDescription>
+                <CardTitle className="text-xl text-center">{benefit.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  className="w-full" 
-                  variant={plan.isRecommended ? "default" : "outline"}
-                >
-                  Start your free trial
-                </Button>
+                <p className="text-muted-foreground text-center">{benefit.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -419,30 +378,50 @@ const PricingSection = () => {
   );
 };
 
+// Mission Section
+const MissionSection = () => (
+  <section className="py-20 section-fade">
+    <div className="container mx-auto px-4">
+      <div className="max-w-4xl mx-auto text-center">
+        <div className="bg-primary/5 p-8 rounded-2xl border border-primary/10">
+          <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
+          <h2 className="text-3xl md:text-4xl font-light mb-6">Nuestra Misión</h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            En VisitScale, creemos que la automatización debe ser simple y accesible para empresas de todos los tamaños. 
+            Nuestra misión es democratizar los flujos de trabajo impulsados por IA, permitiendo a las empresas centrarse 
+            en lo que más importa: hacer crecer su negocio y atender a sus clientes. Estamos comprometidos a hacer que la 
+            tecnología de automatización avanzada sea intuitiva, asequible e increíblemente efectiva.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 // FAQ Section
 const FAQSection = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   
   const faqs = [
     {
-      question: "What types of automation does VisitScale offer?",
-      answer: "VisitScale provides web bots, WhatsApp automation, email automation, appointment booking, customer support, lead capture, and sales assistance workflows."
+      question: "¿Qué tipos de automatización ofrece VisitScale?",
+      answer: "VisitScale proporciona bots web, automatización de WhatsApp, automatización de correo electrónico, reserva de citas, atención al cliente, captura de leads y flujos de trabajo de asistencia de ventas."
     },
     {
-      question: "How quickly can I see results?",
-      answer: "Most clients see initial results within 24-48 hours of setup. Full optimization typically occurs within the first week as our AI learns your specific business patterns."
+      question: "¿Qué tan rápido puedo ver resultados?",
+      answer: "La mayoría de los clientes ven resultados iniciales dentro de las primeras 24-48 horas de configuración. La optimización completa generalmente ocurre dentro de la primera semana a medida que nuestra IA aprende los patrones específicos de tu negocio."
     },
     {
-      question: "Do you integrate with existing tools?",
-      answer: "Yes, we integrate with 100+ popular business tools including CRMs, email platforms, calendar systems, and more. Our API allows for custom integrations as well."
+      question: "¿Se integra con herramientas existentes?",
+      answer: "Sí, nos integramos con más de 100 herramientas empresariales populares, incluyendo CRMs, plataformas de correo electrónico, sistemas de calendario y más. Nuestra API también permite integraciones personalizadas."
     },
     {
-      question: "Is there a setup fee?",
-      answer: "No setup fees. All plans include free onboarding and setup assistance from our team to ensure you're successful from day one."
+      question: "¿Hay una tarifa de configuración?",
+      answer: "No hay tarifas de configuración. Todos los planes incluyen asistencia gratuita para la incorporación y configuración por parte de nuestro equipo para garantizar tu éxito desde el primer día."
     },
     {
-      question: "Can I cancel anytime?",
-      answer: "Absolutely. All plans are month-to-month with no long-term contracts. You can cancel or change your plan at any time."
+      question: "¿Puedo cancelar en cualquier momento?",
+      answer: "Absolutamente. Todos los planes son mensuales sin contratos a largo plazo. Puedes cancelar o cambiar tu plan en cualquier momento."
     }
   ];
 
@@ -450,8 +429,8 @@ const FAQSection = () => {
     <section className="py-20 section-fade">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-light mb-4">Frequently Asked Questions</h2>
-          <p className="text-muted-foreground">Everything you need to know about VisitScale</p>
+          <h2 className="text-3xl md:text-4xl font-light mb-4">Preguntas Frecuentes</h2>
+          <p className="text-muted-foreground">Todo lo que necesitas saber sobre VisitScale</p>
         </div>
         
         <div className="max-w-3xl mx-auto">
@@ -492,8 +471,8 @@ const Home = () => {
       <TestimonialsSection />
       <HowItWorksSection />
       <FeaturesSection />
+      <BenefitsSection />
       <MissionSection />
-      <PricingSection />
       <FAQSection />
     </div>
   );
