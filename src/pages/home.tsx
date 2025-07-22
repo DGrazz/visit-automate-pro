@@ -59,13 +59,13 @@ const useIntersectionObserver = () => {
 // Hero Section
 const HeroSection = () => (
   <section className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
-    <div className="absolute inset-0 w-full h-full z-0">
+    <div className="absolute inset-0 w-full h-full z-0 -top-20">
       <iframe 
-        src='https://my.spline.design/particleaibrain-Bw31czvtCbsp2qOgyYvBgqRH/' 
+        src='https://my.spline.design/aidatamodelinteraction-G4bgSJ8T8FsIAkmAThlGQUBR/' 
         frameBorder='0' 
         width='100%' 
-        height='100%'
-        title="3D AI Brain Visualization"
+        height='120%'
+        title="3D AI Data Model Interaction"
       ></iframe>
     </div>
     <div className="container mx-auto text-center section-fade relative z-10">
