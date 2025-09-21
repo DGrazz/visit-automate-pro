@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { EmailAutomation } from '@/components/EmailAutomation';
 import { 
   Bot, 
   MessageSquare, 
@@ -59,15 +60,6 @@ const useIntersectionObserver = () => {
 // Hero Section
 const HeroSection = () => (
   <section className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden">
-    <div className="absolute inset-0 w-full h-full z-0 -top-20">
-      <iframe 
-        src='https://my.spline.design/aidatamodelinteraction-G4bgSJ8T8FsIAkmAThlGQUBR/' 
-        frameBorder='0' 
-        width='100%' 
-        height='120%'
-        title="3D AI Data Model Interaction"
-      ></iframe>
-    </div>
     <div className="container mx-auto text-center section-fade relative z-10">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-center gap-2 mb-6">
@@ -93,12 +85,10 @@ const HeroSection = () => (
             Ver en Acción
           </Button>
         </div>
-        <div className="relative max-w-4xl mx-auto">
-          <img 
-            src={dashboardMockup} 
-            alt="Panel de VisitScale" 
-            className="rounded-xl shadow-2xl animate-float glassmorphic border border-border/20"
-          />
+        
+        {/* Automatización de Emails */}
+        <div className="relative max-w-5xl mx-auto">
+          <EmailAutomation />
         </div>
       </div>
     </div>
