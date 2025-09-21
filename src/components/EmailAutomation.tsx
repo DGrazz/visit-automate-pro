@@ -293,20 +293,6 @@ export const EmailAutomation = () => {
                       </div>
                     </div>
                   </div>
-                  
-                  {count > 0 && (
-                    <div className="mt-3 pt-3 border-t border-current/20">
-                      <div className="space-y-1">
-                        {processedEmails[key as keyof typeof processedEmails]
-                          .slice(-2)
-                          .map((email) => (
-                          <div key={email.id} className="text-xs opacity-70 truncate bg-white/20 dark:bg-black/20 px-2 py-1 rounded">
-                            📧 {email.subject}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               );
             })}
