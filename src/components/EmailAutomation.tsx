@@ -3,6 +3,7 @@ import { Mail, Folder, CheckCircle, Clock, Briefcase, Users, FileText, Heart } f
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Email {
   id: number;
@@ -64,46 +65,8 @@ const mockEmails: Email[] = [
   }
 ];
 
-const categories = {
-  business: { 
-    name: 'Negocios', 
-    description: 'Propuestas comerciales y oportunidades de negocio',
-    icon: Briefcase, 
-    color: 'bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-200 border-blue-500/30',
-    hoverColor: 'hover:from-blue-500/30 hover:to-blue-600/30 hover:border-blue-400/50',
-    badgeColor: 'bg-blue-500',
-    count: 0 
-  },
-  employees: { 
-    name: 'Empleados', 
-    description: 'Comunicación interna y mensajes del equipo',
-    icon: Users, 
-    color: 'bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 text-emerald-200 border-emerald-500/30',
-    hoverColor: 'hover:from-emerald-500/30 hover:to-emerald-600/30 hover:border-emerald-400/50',
-    badgeColor: 'bg-emerald-500',
-    count: 0 
-  },
-  cv: { 
-    name: 'Candidatos', 
-    description: 'CVs y aplicaciones de trabajo recibidas',
-    icon: FileText, 
-    color: 'bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-200 border-purple-500/30',
-    hoverColor: 'hover:from-purple-500/30 hover:to-purple-600/30 hover:border-purple-400/50',
-    badgeColor: 'bg-purple-500',
-    count: 0 
-  },
-  personal: { 
-    name: 'Personal', 
-    description: 'Mensajes personales e invitaciones privadas',
-    icon: Heart, 
-    color: 'bg-gradient-to-r from-rose-500/20 to-rose-600/20 text-rose-200 border-rose-500/30',
-    hoverColor: 'hover:from-rose-500/30 hover:to-rose-600/30 hover:border-rose-400/50',
-    badgeColor: 'bg-rose-500',
-    count: 0 
-  }
-};
-
 export const EmailAutomation = () => {
+  const { t } = useLanguage();
   const [emails, setEmails] = useState<Email[]>([]);
   const [currentEmailIndex, setCurrentEmailIndex] = useState(0);
   const [processedEmails, setProcessedEmails] = useState<{ [key: string]: Email[] }>({
@@ -115,6 +78,45 @@ export const EmailAutomation = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDemoRunning, setIsDemoRunning] = useState(false);
   const [demoInterval, setDemoInterval] = useState<NodeJS.Timeout | null>(null);
+
+  const categories = {
+    business: { 
+      name: t('category.business.name'), 
+      description: t('category.business.description'),
+      icon: Briefcase, 
+      color: 'bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-200 border-blue-500/30',
+      hoverColor: 'hover:from-blue-500/30 hover:to-blue-600/30 hover:border-blue-400/50',
+      badgeColor: 'bg-blue-500',
+      count: 0 
+    },
+    employees: { 
+      name: t('category.employees.name'), 
+      description: t('category.employees.description'),
+      icon: Users, 
+      color: 'bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 text-emerald-200 border-emerald-500/30',
+      hoverColor: 'hover:from-emerald-500/30 hover:to-emerald-600/30 hover:border-emerald-400/50',
+      badgeColor: 'bg-emerald-500',
+      count: 0 
+    },
+    cv: { 
+      name: t('category.cv.name'), 
+      description: t('category.cv.description'),
+      icon: FileText, 
+      color: 'bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-200 border-purple-500/30',
+      hoverColor: 'hover:from-purple-500/30 hover:to-purple-600/30 hover:border-purple-400/50',
+      badgeColor: 'bg-purple-500',
+      count: 0 
+    },
+    personal: { 
+      name: t('category.personal.name'), 
+      description: t('category.personal.description'),
+      icon: Heart, 
+      color: 'bg-gradient-to-r from-rose-500/20 to-rose-600/20 text-rose-200 border-rose-500/30',
+      hoverColor: 'hover:from-rose-500/30 hover:to-rose-600/30 hover:border-rose-400/50',
+      badgeColor: 'bg-rose-500',
+      count: 0 
+    }
+  };
 
   const startDemo = () => {
     if (isDemoRunning) return;
@@ -203,10 +205,10 @@ export const EmailAutomation = () => {
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-foreground mb-2">
-          Automatización de Emails con IA
+          {t('email.title')}
         </h2>
         <p className="text-muted-foreground mb-4">
-          Observa cómo la IA clasifica automáticamente tus emails en carpetas organizadas
+          {t('email.subtitle')}
         </p>
         <Button 
           onClick={isDemoRunning ? stopDemo : startDemo}
@@ -214,7 +216,7 @@ export const EmailAutomation = () => {
           size="lg"
           className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-glow transition-all duration-300"
         >
-          {isDemoRunning ? "⏹ Detener Demo" : "🚀 Iniciar Test"}
+          {isDemoRunning ? t('email.stopDemo') : t('email.startTest')}
         </Button>
       </div>
 
@@ -223,7 +225,7 @@ export const EmailAutomation = () => {
         <Card className="p-6">
           <div className="flex items-center gap-2 mb-4">
             <Mail className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">Bandeja de entrada</h3>
+            <h3 className="font-semibold">{t('email.inbox')}</h3>
             <Badge variant="secondary">{emails.filter(e => !e.processed).length}</Badge>
           </div>
           
@@ -262,7 +264,7 @@ export const EmailAutomation = () => {
         <Card className="p-6">
           <div className="flex items-center gap-2 mb-4">
             <Folder className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">Carpetas organizadas</h3>
+            <h3 className="font-semibold">{t('email.organizedFolders')}</h3>
           </div>
 
           <div className="space-y-3">
@@ -306,7 +308,7 @@ export const EmailAutomation = () => {
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 border border-primary/30 rounded-xl backdrop-blur-sm shadow-lg">
             <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
             <span className="text-base text-primary font-semibold">
-              Analizando contenido con IA...
+              {t('email.analyzing')}
             </span>
           </div>
         </div>

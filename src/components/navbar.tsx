@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
-];
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar = () => {
+  const { t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navLinks = [
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.about'), href: '/about' },
+    { name: t('nav.blog'), href: '/blog' },
+    { name: t('nav.contact'), href: '/contact' },
+  ];
 
   // Handle scroll effect
   useEffect(() => {
@@ -75,16 +78,20 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Button size="sm">Get Started</Button>
+          <LanguageSwitcher />
+          <Button size="sm">{t('nav.getStarted')}</Button>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground mobile-menu-button"
-          onClick={toggleMobileMenu}
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <button
+            className="p-2 rounded-md text-muted-foreground hover:text-foreground mobile-menu-button"
+            onClick={toggleMobileMenu}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -101,7 +108,7 @@ const Navbar = () => {
             </Link>
           ))}
           <Button className="mt-4" onClick={() => setMobileMenuOpen(false)}>
-            Get Started
+            {t('nav.getStarted')}
           </Button>
         </div>
       </div>
