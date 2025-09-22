@@ -287,7 +287,7 @@ export const EmailAutomation = () => {
                             </div>
                           )}
                         </div>
-                        <p className="text-xs opacity-80 leading-relaxed">
+                        <p className="text-xs opacity-80 leading-relaxed text-left">
                           {category.description}
                         </p>
                       </div>
