@@ -69,8 +69,8 @@ const categories = {
     name: 'Negocios', 
     description: 'Propuestas comerciales y oportunidades de negocio',
     icon: Briefcase, 
-    color: 'bg-blue-100 text-blue-900 border-blue-200',
-    darkColor: 'dark:bg-blue-900/30 dark:text-blue-100 dark:border-blue-800',
+    color: 'bg-gradient-to-r from-blue-500/20 to-blue-600/20 text-blue-200 border-blue-500/30',
+    hoverColor: 'hover:from-blue-500/30 hover:to-blue-600/30 hover:border-blue-400/50',
     badgeColor: 'bg-blue-500',
     count: 0 
   },
@@ -78,17 +78,17 @@ const categories = {
     name: 'Empleados', 
     description: 'Comunicación interna y mensajes del equipo',
     icon: Users, 
-    color: 'bg-green-100 text-green-900 border-green-200',
-    darkColor: 'dark:bg-green-900/30 dark:text-green-100 dark:border-green-800',
-    badgeColor: 'bg-green-500',
+    color: 'bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 text-emerald-200 border-emerald-500/30',
+    hoverColor: 'hover:from-emerald-500/30 hover:to-emerald-600/30 hover:border-emerald-400/50',
+    badgeColor: 'bg-emerald-500',
     count: 0 
   },
   cv: { 
     name: 'Candidatos', 
     description: 'CVs y aplicaciones de trabajo recibidas',
     icon: FileText, 
-    color: 'bg-purple-100 text-purple-900 border-purple-200',
-    darkColor: 'dark:bg-purple-900/30 dark:text-purple-100 dark:border-purple-800',
+    color: 'bg-gradient-to-r from-purple-500/20 to-purple-600/20 text-purple-200 border-purple-500/30',
+    hoverColor: 'hover:from-purple-500/30 hover:to-purple-600/30 hover:border-purple-400/50',
     badgeColor: 'bg-purple-500',
     count: 0 
   },
@@ -96,9 +96,9 @@ const categories = {
     name: 'Personal', 
     description: 'Mensajes personales e invitaciones privadas',
     icon: Heart, 
-    color: 'bg-pink-100 text-pink-900 border-pink-200',
-    darkColor: 'dark:bg-pink-900/30 dark:text-pink-100 dark:border-pink-800',
-    badgeColor: 'bg-pink-500',
+    color: 'bg-gradient-to-r from-rose-500/20 to-rose-600/20 text-rose-200 border-rose-500/30',
+    hoverColor: 'hover:from-rose-500/30 hover:to-rose-600/30 hover:border-rose-400/50',
+    badgeColor: 'bg-rose-500',
     count: 0 
   }
 };
@@ -212,9 +212,9 @@ export const EmailAutomation = () => {
           onClick={isDemoRunning ? stopDemo : startDemo}
           variant={isDemoRunning ? "destructive" : "default"}
           size="lg"
-          className="px-6"
+          className="px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-glow transition-all duration-300"
         >
-          {isDemoRunning ? "Detener Demo" : "🚀 Iniciar Test"}
+          {isDemoRunning ? "⏹ Detener Demo" : "🚀 Iniciar Test"}
         </Button>
       </div>
 
@@ -273,21 +273,21 @@ export const EmailAutomation = () => {
               return (
                 <div
                   key={key}
-                  className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 relative ${category.color} ${category.darkColor}`}
+                  className={`p-4 rounded-xl border-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg backdrop-blur-sm ${category.color} ${category.hoverColor}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <CategoryIcon className="w-5 h-5 flex-shrink-0" />
+                      <CategoryIcon className="w-6 h-6 flex-shrink-0" />
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-sm">{category.name}</span>
+                          <span className="font-semibold text-base">{category.name}</span>
                           {count > 0 && (
-                            <div className={`w-5 h-5 rounded-full ${category.badgeColor} text-white text-xs flex items-center justify-center font-medium`}>
+                            <div className={`w-6 h-6 rounded-full ${category.badgeColor} text-white text-xs flex items-center justify-center font-bold shadow-md`}>
                               {count}
                             </div>
                           )}
                         </div>
-                        <p className="text-xs opacity-80 leading-relaxed text-left">
+                        <p className="text-sm opacity-90 leading-relaxed text-left">
                           {category.description}
                         </p>
                       </div>
@@ -303,9 +303,9 @@ export const EmailAutomation = () => {
       {/* Indicador de procesamiento */}
       {isProcessing && (
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-lg">
-            <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-sm text-primary font-medium">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 border border-primary/30 rounded-xl backdrop-blur-sm shadow-lg">
+            <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-base text-primary font-semibold">
               Analizando contenido con IA...
             </span>
           </div>
